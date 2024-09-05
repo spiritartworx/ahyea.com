@@ -8,8 +8,6 @@ LICENSE_FILE="LICENSE.md"
 CONTRIBUTING_FILE="CONTRIBUTING.md"
 CODE_OF_CONDUCT_FILE="CODE_OF_CONDUCT.md"
 DIRECTORY_STRUCTURE=("docs" "scripts" "config")
-
-# Initiative Repositories
 INITIATIVES=("ahyea.com" "BeatStreetDrummer" "GhostDriver" "LightBeings" "MassiveMind" "FromShadowWithLove")
 
 # Create the main repository directory
@@ -29,7 +27,6 @@ cat <<EOL > $README_FILE
 # Ah Yea Inc.
 
 ## Overview
-
 Welcome to the Ah Yea Inc. repository. This is the central hub for project coordination, documentation, and shared code for our various initiatives.
 
 ### Initiatives
@@ -41,27 +38,21 @@ for initiative in "${INITIATIVES[@]}"; do
 done
 
 cat <<EOL >> $README_FILE
-
 ## Purpose
-
 This repository contains core documentation, configuration, and shared components for Ah Yea Inc. and its initiatives.
 
 ## Directories
-
 - **docs/**: Documentation for shared components and design systems.
 - **scripts/**: Shared scripts for automation and deployment.
 - **config/**: Configuration files relevant across multiple initiatives.
 
 ## Contributing
-
 We welcome contributions! Please check out our [Contributing Guidelines](CONTRIBUTING.md) for more information.
 
 ## License
-
 This project is licensed under the [Creative Commons Non-Commercial, No Derivatives (CC BY-NC-ND)](LICENSE.md) license.
 
 ## Code of Conduct
-
 Please review our [Code of Conduct](CODE_OF_CONDUCT.md) to understand our community expectations.
 EOL
 
@@ -80,16 +71,28 @@ EOL
 # Create a CONTRIBUTING file
 cat <<EOL > $CONTRIBUTING_FILE
 # Contributing to Ah Yea Inc.
-
 We welcome contributions to help us make our initiatives a success. Please review our guidelines and reach out for collaborative opportunities.
 EOL
 
 # Create a CODE_OF_CONDUCT file
 cat <<EOL > $CODE_OF_CONDUCT_FILE
 # Code of Conduct
-
 Our Code of Conduct outlines the expectations for behavior within our community. We strive to create a respectful and inclusive environment for all participants.
 EOL
+
+# Create and initialize initiative repositories
+for initiative in "${INITIATIVES[@]}"; do
+    mkdir ../$initiative
+    cd ../$initiative
+    git init
+    touch README.md
+    git add README.md
+    git commit -m "Initial commit"
+    git branch -M main
+    git remote add origin "https://github.com/spiritartworx/$initiative.git"
+    git push -u origin main
+    cd ../$REPO_NAME
+done
 
 # Commit and push the main repository to GitHub
 git add .
