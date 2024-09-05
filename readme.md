@@ -1,5 +1,3 @@
-# Deep_Theta_Gamma_Wobble_readme.md
-
 # readme.md
 
 # Deep Theta Gamma Wobble
